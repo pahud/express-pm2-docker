@@ -6,7 +6,7 @@ sample reference architects running [Express](https://github.com/expressjs/expre
 
 Build the docker image
 
-```
+```bash
 $ make build-pm2
 ```
 
@@ -14,7 +14,7 @@ $ make build-pm2
 
 Run PM2 with Docker
 
-```
+```Bash
 $ make run-pm2
 ```
 

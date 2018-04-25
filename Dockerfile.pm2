@@ -10,7 +10,7 @@ ENV NPM_CONFIG_LOGLEVEL warn
 RUN npm install --production
 
 # Show current folder structure in logs
-RUN ls -al -R
-EXPOSE 8080
+#RUN ls -al -R
+EXPOSE 8888
 
-CMD [ "pm2-runtime", "start", "pm2.json" ]
+CMD [ "pm2-runtime", "start", "--json", "pm2.json" ]

@@ -13,7 +13,7 @@ RUN npm install
 # RUN npm install --only=production
 
 # Bundle app source
-COPY src/index.js ./index.js
+COPY src/app.js ./
 
 EXPOSE 8080
 CMD npm start

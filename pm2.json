@@ -1,7 +1,8 @@
 {
   "name": "your-app-name",
   "script": "src/app.js",
-  "instances": "2",
+  "instances": "0",
+  "exec_mode": "cluster",
   "env": {
     "NODE_ENV": "development"
   },

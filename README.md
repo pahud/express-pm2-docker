@@ -218,5 +218,52 @@ $ fargate --region us-west-2 service destroy demoexpress
    ```
 
 
+4. create a CodePipeline with Github as the source.
+5. Configure CodeBuild and the build provider, set `imagedefinitions.json` as the output docker image filename.
+6. Set Amazon ECS as the Deployment Provider to cluster `fargate` and service name `demoexpress`
+7. You may edit the `src/app.js` in github web page by clicking the edit button. By clicking the save button, your CodePipeline will be triggered immediately and the whole CI/CD pipeline will take about 5 minutes to complete.
 
-    
+
+
+# Deploy to Amazon EKS
+
+follow [pahud/amazon-eks-workshop](pahud/amazon-eks-workshop) to create your Amazon EKS cluster with eksctl ([walkthrough](https://github.com/pahud/amazon-eks-workshop/blob/master/00-getting-started/create-eks-with-eksctl.md)).
+
+```
+// run the deployment
+$ kubectl run demoexpress --port 8080 --image 903779448426.dkr.ecr.us-west-2.amazonaws.com/pm2-express-demo:latest
+// expose the deployment as LoadBalancer type service
+$ kubectl expose deploy/demoexpress --port 80 --target-port 8080 --type LoadBalancer
+// describe the service
+$ kubectl describe svc/demoexpress
+
+Name:                     demoexpress
+Namespace:                default
+Labels:                   run=demoexpress
+Annotations:              <none>
+Selector:                 run=demoexpress
+Type:                     LoadBalancer
+IP:                       10.100.73.61
+LoadBalancer Ingress:     ae64442c3b9e111e8a83b0a17b84b3b7-296496059.us-west-2.elb.amazonaws.com
+Port:                     <unset>  80/TCP
+TargetPort:               8080/TCP
+NodePort:                 <unset>  31615/TCP
+Endpoints:                192.168.93.124:8080
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:
+  Type    Reason                Age   From                Message
+  ----    ------                ----  ----                -------
+  Normal  EnsuringLoadBalancer  8s    service-controller  Ensuring load balancer
+  Normal  EnsuredLoadBalancer   5s    service-controller  Ensured load balancer
+
+```
+
+Get the LB DNS name from `LoadBalancer Ingress` and try cURL on it
+
+```
+$ curl ae64442c3b9e111e8a83b0a17b84b3b7-296496059.us-west-2.elb.amazonaws.com
+Hello There!
+```
+
+Check more basic Kubernetes administratiev operations [here](https://github.com/pahud/amazon-eks-workshop/blob/master/02-kubectl-basic-admin/kubectl-basic-admin.md).

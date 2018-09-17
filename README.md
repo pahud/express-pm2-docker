@@ -227,7 +227,7 @@ $ fargate --region us-west-2 service destroy demoexpress
 
 # Deploy to Amazon EKS
 
-follow [pahud/amazon-eks-workshop](pahud/amazon-eks-workshop) to create your Amazon EKS cluster with eksctl ([walkthrough](https://github.com/pahud/amazon-eks-workshop/blob/master/00-getting-started/create-eks-with-eksctl.md)).
+follow [pahud/amazon-eks-workshop](https://github.com/pahud/amazon-eks-workshop) to create your Amazon EKS cluster with eksctl ([walkthrough](https://github.com/pahud/amazon-eks-workshop/blob/master/00-getting-started/create-eks-with-eksctl.md)).
 
 ```
 // run the deployment
